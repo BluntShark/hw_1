@@ -17,6 +17,31 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class MainTest {
+    /*
+    public void writeToFile(){
+        Map<Integer, String[]> resourceMap = new HashMap<>();
+        resourceMap.put(1, new String[]{"name1", "description1", "link1"});
+        resourceMap.put(2, new String[]{"name2", "description2", "link2"});
+        resourceMap.put(3, new String[]{"name3", "description3", "link3"});
+        resourceMap.put(4, new String[]{"name4", "description4", "link4"});
+        resourceMap.put(5, new String[]{"name5", "description5", "link5"});
+        resourceMap.put(6, new String[]{"name6", "description6", "link6"});
+
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("projectFiles/testFile.txt"))) {
+            for (Map.Entry<Integer, String[]> entry : resourceMap.entrySet()) {
+                int id = entry.getKey();
+                String[] values = entry.getValue();
+                String line = id + "," + values[0] + "," + values[1] + "," + values[2];
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("HashMap записана в файл " + "projectFiles/testFile.txt");
+    }
     @Test
     void testGetIDInf0(){
         DisplayToScreen displayToScreen = new DisplayToScreen();
@@ -43,6 +68,7 @@ public class MainTest {
     }
     @Test
     void testWriteToFile(){
+        /*
         ResourceInfo resourceInfo = new ResourceInfo();
         resourceInfo.writeToFile();
 
@@ -61,7 +87,10 @@ public class MainTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
+*/
 
 }

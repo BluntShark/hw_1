@@ -1,32 +1,33 @@
 package com.thewhite.study;
 
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+
+import static java.util.Collections.list;
 
 public class FindAnEntry {
-    public final static DisplayToScreen displayToScreen = new DisplayToScreen();
-    public void searchByName(Map<Integer, String[]> resourceMap, String nameToFind) {
-
-        boolean found = false;
-        for (Map.Entry<Integer, String[]> entry : resourceMap.entrySet()) {
+    public void searchByName(Map<Integer, ResourceInfo<String>> resourceMap, String nameToFind) {
+        List list = new ArrayList();
+        for (Map.Entry<Integer, ResourceInfo<String>> entry : resourceMap.entrySet()) {
             int id = entry.getKey();
-            String[] data = entry.getValue();
-            String name = data[0];
+            ResourceInfo<String> data = entry.getValue();
+            String name = data.getName();
 
             if (name != null && name.toLowerCase().contains(nameToFind.toLowerCase())) {
-                if (!found) {
-                    System.out.println("Найденные записи:");
-                    found = true;
-                }
-                String description = data[1];
-                String link = data[2];
+                String description = data.getDescription();
+                String link = data.getLink();
 
-                displayToScreen.print(id, name, description, link);
+                ResourceInfo resource = new ResourceInfo(id, name, description, link);
+                list.add(resource);
+
             }
         }
-
-        if (!found) {
-            System.out.println("Записи с указанным наименованием не найдены.");
+        if(!list.isEmpty()){
+            for (Object obj : list) {
+                System.out.println(obj);
+            }
+        }
+        else{
+            System.out.println("Записи не найдены");
         }
     }
 
