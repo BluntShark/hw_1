@@ -3,37 +3,34 @@ package com.thewhite.study;
 import java.util.*;
 
 public class DisplayToScreen {
-    public void printID(Map<Integer, String[]> resourceMap, int idInt) {
-        boolean found = false;
-        for (Map.Entry<Integer, String[]> entry : resourceMap.entrySet()) {
-            int id = entry.getKey();
-            String[] data = entry.getValue();
-            String name = data[0];
-            String description = data[1];
-            String link = data[2];
-
-            if(id == idInt) {
-                if (!found) {
-                    System.out.println("Найденная запись:");
-                    found = true;
-                }
-                print(id, name, description, link);
-            }
-        }
-        if (!found) {
+    public void printID(Map<Integer, ResourceInfo<String>> resourceMap, int idInt) {
+        var result = resourceMap.get(idInt);
+        if (result == null) {
             System.out.println("Запись с указанным идентификатором не найдена");
         }
+        else{
+            for (Map.Entry<Integer, ResourceInfo<String>> entry : resourceMap.entrySet()) {
+                int id = entry.getKey();
+                ResourceInfo<String> data = entry.getValue();
+                String name = data.getName();
+                String description = data.getDescription();
+                String link = data.getLink();
+
+                if(id == idInt) {print(id, name, description, link);}
+            }
+        }
     }
-    public void printHashMap(Map<Integer, String[]> resourceMap) {
-        for (Map.Entry<Integer, String[]> entry : resourceMap.entrySet()) {
+    public void printHashMap(Map<Integer, ResourceInfo<String>> resourceMap) {
+        for (Map.Entry<Integer, ResourceInfo<String>> entry : resourceMap.entrySet()) {
             int id = entry.getKey();
-            String[] data = entry.getValue();
-            String name = data[0];
-            String description = data[1];
-            String link = data[2];
+            ResourceInfo<String> data = entry.getValue();
+            String name = data.getName();
+            String description = data.getDescription();
+            String link = data.getLink();
 
             print(id, name, description, link);
         }
+
 
     }
     public void print(int id, String name, String description, String link){
@@ -41,5 +38,8 @@ public class DisplayToScreen {
                 + " name: " + name
                 + " description: " + description
                 + " link: " + link);
+    }
+    public void printObj(Object object){
+        System.out.println(object.toString());
     }
 }

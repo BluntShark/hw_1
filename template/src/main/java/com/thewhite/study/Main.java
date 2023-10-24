@@ -6,19 +6,28 @@ public class Main {
     public final static Reading reading = new Reading();
     public final static DisplayToScreen displayToScreen = new DisplayToScreen();
     public final static FindAnEntry findAnEntry = new FindAnEntry();
+    public static String filePath;
+    public static Map<Integer, ResourceInfo<String>> map;
+
 
     public static void main(String[] args){
-        Menu menu = new Menu();
-        menu.setChoice("0");
+        if (args.length > 0) {
+            filePath = args[0];
+            System.out.println("Путь до файла: " + filePath);
+            map = reading.HashMapFromTextFile();
 
-        while (!menu.getChoice().equals("4")){
-            print();
+            int menu = 0;
+            while (menu != 4){
+                print();
 
-            Scanner in = new Scanner(System.in);
-            String option = in.nextLine();
+                Scanner in = new Scanner(System.in);
+                int option = in.nextInt();
 
-            menu.setChoice(option);
-            getChoice(menu);
+                menu = option;
+                getChoice(menu);
+            }
+        } else{
+            System.out.println("Путь до файла не был предоставлен");
         }
     }
     static void print(){
@@ -29,13 +38,13 @@ public class Main {
                         "3 - Вывести на экран все записи\n" +
                         "4 - Завершить (закрыть программу)");
     }
-    static void getChoice(Menu menu){
-        String a = menu.getChoice();
+    static void getChoice(int menu){
+        int a = menu;
         switch (a){
-            case "1" -> display();
-            case "2" -> find();
-            case "3" -> displayAll();
-            case "4" -> exit();
+            case 1 -> display();
+            case 2 -> find();
+            case 3 -> displayAll();
+            case 4 -> exit();
             default -> System.out.println("Введено некорректное значение");
         }
     }
@@ -43,17 +52,16 @@ public class Main {
         Scanner display = new Scanner(System.in);
         System.out.println("Введите идентификатор: ");
         int idInt = display.nextInt();
-        displayToScreen.printID(reading.HashMapFromTextFile(), idInt);
+        displayToScreen.printID(map, idInt);
     }
     static void find() {
         Scanner display = new Scanner(System.in);
         System.out.println("Введите наименование: ");
         String nameToFind = display.nextLine();
-
-        findAnEntry.searchByName(reading.HashMapFromTextFile(), nameToFind);
+        findAnEntry.searchByName(map, nameToFind);
     }
     static void displayAll(){
-        displayToScreen.printHashMap(reading.HashMapFromTextFile());
+        displayToScreen.printHashMap(map);
     }
     static void exit(){
         System.out.println("-----До скорой встречи-----");

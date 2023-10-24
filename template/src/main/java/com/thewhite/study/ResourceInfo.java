@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.thewhite.study.Reading.filePath;
 
-public class ResourceInfo {
+public class ResourceInfo<T> {
     private int id;
     private String name;
     private String description;
@@ -45,31 +44,23 @@ public class ResourceInfo {
     public void setLink(String link) {
         this.link = link;
     }
-
-
-    public void writeToFile(){
-        Map<Integer, String[]> resourceMap = new HashMap<>();
-        resourceMap.put(1, new String[]{"name1", "description1", "link1"});
-        resourceMap.put(2, new String[]{"name2", "description2", "link2"});
-        resourceMap.put(3, new String[]{"name3", "description3", "link3"});
-        resourceMap.put(4, new String[]{"name4", "description4", "link4"});
-        resourceMap.put(5, new String[]{"name5", "description5", "link5"});
-        resourceMap.put(6, new String[]{"name6", "description6", "link6"});
-
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("projectFiles/testFile.txt"))) {
-            for (Map.Entry<Integer, String[]> entry : resourceMap.entrySet()) {
-                int id = entry.getKey();
-                String[] values = entry.getValue();
-                String line = id + "," + values[0] + "," + values[1] + "," + values[2];
-                writer.write(line);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("HashMap записана в файл " + "projectFiles/testFile.txt");
+    public ResourceInfo(int id, String name, String description, String link) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.link = link;
+    }
+    public ResourceInfo(String name, String description, String link) {
+        this.name = name;
+        this.description = description;
+        this.link = link;
+    }
+    @Override
+    public String toString() {
+        return "id: " + id
+                + " name: " + name
+                + " description: " + description
+                + " link: " + link;
     }
 
 }
