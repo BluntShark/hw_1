@@ -18,7 +18,6 @@ public class FindAnEntry {
 
                 ResourceInfo resource = new ResourceInfo(id, name, description, link);
                 list.add(resource);
-
             }
         }
         if(!list.isEmpty()){
