@@ -7,15 +7,12 @@ public class Main {
     public final static DisplayToScreen displayToScreen = new DisplayToScreen();
     public final static FindAnEntry findAnEntry = new FindAnEntry();
     public static String filePath;
-    public static Map<Integer, ResourceInfo<String>> map;
-
+    public final static Map<Integer, ResourceInfo<String>> map = reading.HashMapFromTextFile();
 
     public static void main(String[] args){
         if (args.length > 0) {
             filePath = args[0];
             System.out.println("Путь до файла: " + filePath);
-            map = reading.HashMapFromTextFile();
-
             int menu = 0;
             while (menu != 4){
                 print();
@@ -58,6 +55,7 @@ public class Main {
         Scanner display = new Scanner(System.in);
         System.out.println("Введите наименование: ");
         String nameToFind = display.nextLine();
+
         findAnEntry.searchByName(map, nameToFind);
     }
     static void displayAll(){
