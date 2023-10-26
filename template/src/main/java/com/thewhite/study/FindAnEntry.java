@@ -2,14 +2,12 @@ package com.thewhite.study;
 
 import java.util.*;
 
-import static java.util.Collections.list;
-
 public class FindAnEntry {
-    public void searchByName(Map<Integer, ResourceInfo<String>> resourceMap, String nameToFind) {
-        List list = new ArrayList();
-        for (Map.Entry<Integer, ResourceInfo<String>> entry : resourceMap.entrySet()) {
+    public void searchByName(Map<Integer, ResourceInfo> resourceMap, String nameToFind) {
+        List<ResourceInfo> list = new ArrayList<>();
+        for (Map.Entry<Integer, ResourceInfo> entry : resourceMap.entrySet()) {
             int id = entry.getKey();
-            ResourceInfo<String> data = entry.getValue();
+            ResourceInfo data = entry.getValue();
             String name = data.getName();
 
             if (name != null && name.toLowerCase().contains(nameToFind.toLowerCase())) {
@@ -21,13 +19,12 @@ public class FindAnEntry {
             }
         }
         if(!list.isEmpty()){
-            for (Object obj : list) {
-                System.out.println(obj);
+            for (ResourceInfo resourceInfo : list) {
+                System.out.println(resourceInfo);
             }
         }
         else{
             System.out.println("Записи не найдены");
         }
     }
-
 }
