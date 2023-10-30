@@ -1,5 +1,8 @@
-package com.thewhite.study;
+package org.example;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 public class Main {
     public final static Reading reading = new Reading();
@@ -10,22 +13,22 @@ public class Main {
 
     public static void main(String[] args){
         if (args.length > 0) {
-            filePath = args[0];
-            System.out.println("Путь до файла: " + filePath);
+        filePath = args[0];
+        System.out.println("Путь до файла: " + filePath);
 
-            map = reading.HashMapFromTextFile(filePath);
+        map = reading.HashMapFromTextFile(filePath);
 
-            int menu = 0;
-            while (menu != 4){
-                print();
+        int menu = 0;
+        while (menu != 4){
+            print();
 
-                Scanner in = new Scanner(System.in);
-                menu = in.nextInt();
+            Scanner in = new Scanner(System.in);
+            menu = in.nextInt();
 
-                getChoice(menu);
-            }
+            getChoice(menu);
+        }
         } else{
-            System.out.println("Путь до файла не был предоставлен");
+        System.out.println("Путь до файла не был предоставлен");
         }
     }
     static void print(){
