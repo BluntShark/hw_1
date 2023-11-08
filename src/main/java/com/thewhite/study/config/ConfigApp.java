@@ -13,10 +13,9 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class ConfigApp {
     UploadingFiles uploadingFiles;
-
-    ResourceInfoRepository resource;
+    ResourceInfoRepository repository;
     @PostConstruct
     public void uploadRepository() {
-        resource.upload(uploadingFiles.HashMapFromJSONFile());
+        repository.upload(uploadingFiles.hashMap());
     }
 }

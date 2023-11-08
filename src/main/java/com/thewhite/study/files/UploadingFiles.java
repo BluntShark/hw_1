@@ -14,21 +14,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-//@PropertySource("file.name:application.properties")
 public class UploadingFiles {
     private String filePath;
     @Autowired
-    public UploadingFiles(@Value("${file.name}") String filePath) {
-        this.filePath = filePath;
+    public UploadingFiles(@Value("${file.name}") String _filePath) {
+        this.filePath = _filePath;
     }
-    public Map<Integer, ResourceInfo> HashMapFromJSONFile() {
+    public Map<Integer, ResourceInfo> hashMap() {
         Map<Integer, ResourceInfo> resourceMap = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode jsonNode = objectMapper.readTree(new File(filePath));
             if (jsonNode.isArray()) {
                 for (JsonNode node : jsonNode) {
-                    ResourceInfo resourceInfo = new ResourceInfo(node.get("id").asInt(), node.get("name").asText(), node.get("description").asText(), node.get("link").asText());
+                    ResourceInfo resourceInfo = objectMapper.treeToValue(node, ResourceInfo.class);
                     resourceMap.put(resourceInfo.getId(), resourceInfo);
                 }
             }
