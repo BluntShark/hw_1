@@ -1,8 +1,0 @@
-com\thewhite\study\files\UploadingFiles.class
-com\thewhite\study\model\ResourceInfo$ResourceInfoBuilder.class
-com\thewhite\study\config\ConfigApp.class
-com\thewhite\study\controller\CommandLineRunnerController.class
-com\thewhite\study\model\ResourceInfo.class
-com\thewhite\study\service\ResourceInfoService.class
-com\thewhite\study\Main.class
-com\thewhite\study\repository\ResourceInfoRepository.class
