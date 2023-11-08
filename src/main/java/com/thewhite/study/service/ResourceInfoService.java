@@ -3,16 +3,18 @@ package com.thewhite.study.service;
 import com.thewhite.study.model.ResourceInfo;
 import com.thewhite.study.repository.ResourceInfoRepository;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-@RequiredArgsConstructor
 public class ResourceInfoService {
-    ResourceInfoRepository repository = new ResourceInfoRepository();
-    //теперь реализация метода в репозитории, но map не инициализируется и не загружается
+    private ResourceInfoRepository repository;
+    @Autowired
+    public ResourceInfoService(ResourceInfoRepository repository){
+        this.repository = repository;
+    }
     public void searchByName(@NonNull String nameToFind) {
         List<ResourceInfo> list = repository.searchByName(nameToFind);
         if(!list.isEmpty()){

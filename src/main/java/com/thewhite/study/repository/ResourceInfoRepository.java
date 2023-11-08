@@ -1,6 +1,5 @@
 package com.thewhite.study.repository;
 
-import com.thewhite.study.files.UploadingFiles;
 import com.thewhite.study.model.ResourceInfo;
 import lombok.NonNull;
 import org.springframework.stereotype.Repository;
@@ -12,20 +11,13 @@ import java.util.Map;
 
 @Repository
 public class ResourceInfoRepository {
-    //необходимый map
-    private final Map<Integer, ResourceInfo> resourceInfo = new HashMap<>();
-
-
-    //пока так оставила, чтобы работало (и в методах этот map использую)
-    private UploadingFiles files = new UploadingFiles("src/main/resources/description.json");
-    Map<Integer, ResourceInfo> map = files.hashMap();
-
+    private Map<Integer, ResourceInfo> resourceInfo = new HashMap<>();
     public void upload(@NonNull Map<Integer, ResourceInfo> resourceInfoMap) {
         resourceInfo.putAll(resourceInfoMap);
     }
     public List<ResourceInfo> searchByName(@NonNull String nameToFind){
         List<ResourceInfo> list = new ArrayList<>();
-        for (Map.Entry<Integer, ResourceInfo> entry : map.entrySet()) {
+        for (Map.Entry<Integer, ResourceInfo> entry : resourceInfo.entrySet()) {
             int id = entry.getKey();
             ResourceInfo data = entry.getValue();
             String name = data.getName();
@@ -41,10 +33,10 @@ public class ResourceInfoRepository {
         return list;
     }
     public ResourceInfo printID(int idInt) {
-        return map.get(idInt);
+        return resourceInfo.get(idInt);
     }
     public void printHashMap() {
-        for (Map.Entry<Integer, ResourceInfo> entry : map.entrySet()) {
+        for (Map.Entry<Integer, ResourceInfo> entry : resourceInfo.entrySet()) {
             int id = entry.getKey();
             ResourceInfo data = entry.getValue();
             String name = data.getName();

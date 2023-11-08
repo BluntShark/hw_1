@@ -3,9 +3,7 @@ package com.thewhite.study.files;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thewhite.study.model.ResourceInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -15,10 +13,9 @@ import java.util.Map;
 
 @Component
 public class UploadingFiles {
-    private String filePath;
-    @Autowired
-    public UploadingFiles(@Value("${file.name}") String _filePath) {
-        this.filePath = _filePath;
+    final private String filePath;
+    public UploadingFiles(@Value("${file.name}") String filePath) {
+        this.filePath = filePath;
     }
     public Map<Integer, ResourceInfo> hashMap() {
         Map<Integer, ResourceInfo> resourceMap = new HashMap<>();
